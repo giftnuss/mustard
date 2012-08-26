@@ -2,6 +2,8 @@
 CC=gcc
 SRC=.
 LIBS=""
+BINDIR=.
+OBJ="build/*.o"
 
 function compile ()
 {
@@ -43,11 +45,18 @@ function build_sdl ()
 	build_and_run $@
 }
 
+function build_tap ()
+{
+	BINDIR=./tap
+	OBJ=$(ls build/*.o | grep -v sdl)
+    build_and_run $@
+}
+
 function build_and_run ()
 {
 	local file n src trg bld
 	file=$1; shift
-	n=$(basename $file .c)
+	n=$BINDIR/$(basename $file .c)
 	src=$(stat --printf %Y $file)
 	
 	if [ -f $n ]; then
@@ -59,11 +68,11 @@ function build_and_run ()
 	
 	if [ -n "$bld" ] ; then
 		cmd="$CC -Wall -I ./include -std=c99 "
-		cmd="$cmd -o $n $file build/*.o $LIBS"
+		cmd="$cmd -o $n $file $OBJ $LIBS"
 		echo $cmd
 		$cmd
 	fi
-	./$n
+	$n
 }
 
 

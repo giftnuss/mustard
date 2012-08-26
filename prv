@@ -1,9 +1,11 @@
 #!/bin/bash
 
+mkdir -p tap
+
 . functions
 
 tests="text render symbol leafs bits my_str"
 
 for t in $tests; do
-    build_and_run t/$t.c | grep "^not ok" && echo $t.
+    build_tap t/$t.c | grep "^not ok" && echo $t.
 done
