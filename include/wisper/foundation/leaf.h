@@ -8,7 +8,7 @@
 struct Leaf {
   void* leaf;
   void (*render)(struct Leaf*, text_t);
-  void (*free)(struct Leaf*);
+  void (*free_leaf)(struct Leaf*);
 };
 
 typedef struct Leaf leaf_type;

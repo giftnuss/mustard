@@ -22,7 +22,7 @@ static void _free(node_t self)
 static void my_methods(node_t self)
 {
   self->render = _render;
-  self->free = _free;
+  self->free_node = _free;
 }
 
 node_t new_textnode()

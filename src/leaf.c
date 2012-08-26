@@ -17,6 +17,9 @@ static leaf_t _alloc_self()
 leaf_t new_leaf()
 {
   leaf_t self = _alloc_self();
+  self->leaf = NULL;
+  self->render = NULL;
+  self->free_leaf = NULL;
   return self;
 }
 
@@ -27,6 +30,6 @@ void render_leaf(leaf_t self, text_t result)
 
 void delete_leaf(leaf_t self)
 {
-  self->free(self);
+  self->free_leaf(self);
   free(self);
 }

@@ -9,7 +9,7 @@ struct Node {
   nodelist_t nodes;
   void* node;
   void (*render)(struct Node*, text_t);
-  void (*free)(struct Node*);
+  void (*free_node)(struct Node*);
 };
 
 typedef struct Node node_type;

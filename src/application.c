@@ -17,7 +17,7 @@ static char* _default_home_directory()
   if( (pwent=getpwuid(uid)) != NULL) {
     home_dir = pwent->pw_dir;
   }
-  return home_dir;
+  return my_str(home_dir);
 }
 
 static application_t _alloc_application()
@@ -36,11 +36,16 @@ application_t new_application(const char* name, const char* version)
   self->name = my_str(name);
   self->version = my_str(version);
   self->home_directory = _default_home_directory();
+  self->real_app = NULL;
+  self->free_real_app = NULL;
   return self;
 }
 
 void delete_application(application_t self)
 {
+  if(self->real_app != NULL) {
+	  self->free_real_app(self);
+  }
   free(self->home_directory);
   free(self->version);
   free(self->name);

@@ -18,6 +18,6 @@ leaf_t new_symbol_leaf(const char* symbol)
   leaf_t self = new_leaf();
   self->leaf = new_symbol(symbol);
   self->render = _render;
-  self->free = _free_symbol_leaf;
+  self->free_leaf = _free_symbol_leaf;
   return self;
 }

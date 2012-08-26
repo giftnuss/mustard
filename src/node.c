@@ -26,7 +26,7 @@ static void _free(node_t self)
 static void my_methods(node_t self)
 {
   self->render = _render;
-  self->free = _free;
+  self->free_node = _free;
 }
 
 node_t new_node()
@@ -40,8 +40,9 @@ node_t new_node()
 
 void delete_node(node_t self)
 {
-  self->free(self);
+  self->free_node(self);
   free_list_of_nodes(self->nodes);
+  free(self);
 }
 
 int add_node(node_t outer, node_t inner)

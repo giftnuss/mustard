@@ -6,6 +6,8 @@ struct Application {
 	char *name;
 	char *version;
 	char *home_directory;
+	void *real_app;
+	void (*free_real_app)(struct Application*);
 };
 
 typedef struct Application application_type;
