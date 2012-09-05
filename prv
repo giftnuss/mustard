@@ -7,5 +7,7 @@ mkdir -p tap
 tests="text render symbol leafs bits my_str"
 
 for t in $tests; do
-    build_tap t/$t.c | grep "^not ok" && echo $t.
+    tmp=$(build_tap t/$t.c)
+    [ $? -eq 0 ] || echo $t
+    echo "$tmp" | grep "^not ok" && echo $t.
 done
