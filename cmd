@@ -16,6 +16,7 @@ compile symbol.c
 compile leaf.c
 compile symbolleaf.c
 compile bitlist64.c
+compile bitmap.c
 compile list_of_leaves.c
 #rm build/message.o
 compile message.c
