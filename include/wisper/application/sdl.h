@@ -7,7 +7,11 @@
 
 #include <wisper/application.h>
 
-application_t new_application_sdl(char *, char *);
+typedef SDL_Surface* screen_t;
 
+application_t new_application_sdl(const char *, const char *);
+
+screen_t build_screen(int, int);
+ 
 #endif
 
