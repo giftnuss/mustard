@@ -29,5 +29,7 @@ void set_bitmap_bit(bitmap_t, int, int, bit_value_type);
 void bitmap_bit_on(bitmap_t, int, int);
 void bitmap_bit_off(bitmap_t, int, int);
 
+void delete_bitmap(bitmap_t);
+
 #endif
 

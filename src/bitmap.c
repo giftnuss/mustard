@@ -94,3 +94,10 @@ bit_value_type toggle_bitmap_bit(bitmap_t self, int x, int y)
   set_bitmap_bit(self,x,y,toggled);
   return toggled;
 }
+
+void delete_bitmap(bitmap_t self)
+{
+  free(self->bits);
+  free(self);
+}
+
