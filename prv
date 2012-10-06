@@ -4,7 +4,7 @@ mkdir -p tap
 
 . functions
 
-tests="text render symbol leafs bits my_str"
+tests="text render symbol leafs bits my_str tags attr html5"
 
 for t in $tests; do
     tmp=$(build_tap t/$t.c)

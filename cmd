@@ -15,6 +15,7 @@ compile text.c
 compile symbol.c
 compile leaf.c
 compile symbolleaf.c
+compile bitfield64.c
 compile bitlist64.c
 compile bitmap.c
 compile list_of_leaves.c
@@ -22,13 +23,19 @@ compile list_of_leaves.c
 compile message.c
 compile application.c
 compile my.c
+compile tags.c
+compile tag.c
+compile attribute.c
+compile document.c
 
-compile_sdl application_sdl.c
+ar -v -r wisper.a build/*.o
+
+#compile_sdl application_sdl.c
 
 #build_and_run taptest.c
 #build_and_run main.c
 
 #build_and_run sample/01/hello.c
-build_sdl blinky.c
+#build_sdl blinky.c
 
 
