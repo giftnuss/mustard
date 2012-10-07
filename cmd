@@ -28,6 +28,7 @@ compile tag.c
 compile attribute.c
 compile document.c
 
+strip build/*.o
 ar -v -r wisper.a build/*.o
 
 #compile_sdl application_sdl.c
