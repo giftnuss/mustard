@@ -27,9 +27,11 @@ compile tags.c
 compile tag.c
 compile attribute.c
 compile document.c
+compile constant_nodes.c
 
-strip build/*.o
-ar -v -r wisper.a build/*.o
+#strip build/*.o
+strip -x build/*.o
+ar -ru wisper.a build/*.o
 
 #compile_sdl application_sdl.c
 

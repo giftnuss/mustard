@@ -10,14 +10,26 @@
 
 static void check_name_def()
 {	
-  is(_at[ attribute_action ],"action","action attribute");
-  is(_at[ attribute_alt    ],"alt","alt attribute");
-  is(_at[ attribute_class  ],"class","class attribute");
-  is(_at[ attribute_id     ],"id","id attribute");
-  is(_at[ attribute_method ],"method","method attribute");
-  is(_at[ attribute_style  ],"style","style attribute");
-  is(_at[ attribute_target ],"target","target attribute");
-  is(_at[ attribute_title  ],"title","title attribute");
+  is(_at[ attribute_action  ],"action","action attribute");
+  is(_at[ attribute_alt     ],"alt","alt attribute");
+  is(_at[ attribute_charset ],"charset","charset attribute");
+  is(_at[ attribute_class   ],"class","class attribute");
+  is(_at[ attribute_dir     ],"dir","dir attribute");
+  is(_at[ attribute_disabled ],"disabled","disabled attribute");
+  is(_at[ attribute_href    ],"href","href attribute");
+  is(_at[ attribute_id      ],"id","id attribute");
+  is(_at[ attribute_lang    ],"lang","lang attribute");
+  is(_at[ attribute_method  ],"method","method attribute");
+  is(_at[ attribute_name    ],"name","name attribute");
+  is(_at[ attribute_readonly ],"readonly","readonly attribute");
+  is(_at[ attribute_rel     ],"rel","rel attribute");
+  is(_at[ attribute_rev     ],"rev","rev attribute");
+  is(_at[ attribute_src     ],"src","src attribute");
+  is(_at[ attribute_style   ],"style","style attribute");
+  is(_at[ attribute_tabindex ],"tabindex","tabindex attribute");
+  is(_at[ attribute_target  ],"target","target attribute");
+  is(_at[ attribute_title   ],"title","title attribute");
+  is(_at[ attribute_type    ],"type","type attribute");
 }
 
 static void render_attr(html5_attribute_type type, char* expect)
@@ -35,8 +47,10 @@ static void render_attrs()
   render_attr(attribute_action, "action=\"\"");
   render_attr(attribute_alt, "alt=\"\"");
   render_attr(attribute_class, "class=\"\"");
+  render_attr(attribute_disabled, "disabled");
   render_attr(attribute_id, "id=\"\"");
   render_attr(attribute_method, "method=\"\"");
+  render_attr(attribute_readonly, "readonly");
   render_attr(attribute_style, "style=\"\"");
   render_attr(attribute_target, "target=\"\"");
   render_attr(attribute_title, "title=\"\"");

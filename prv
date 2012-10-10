@@ -6,8 +6,10 @@ mkdir -p tap
 
 tests="text render symbol leafs bits my_str tags attr html5"
 
-for t in $tests; do
+for f in t/*.c ; do
+    t=$(basename $f .c)
     tmp=$(build_tap t/$t.c)
+    #echo $tmp
     [ $? -eq 0 ] || echo $t
     echo "$tmp" | grep "^not ok" && echo $t.
 done

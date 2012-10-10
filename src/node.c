@@ -38,11 +38,23 @@ node_t new_node()
   return self;
 }
 
+node_t new_constant_node()
+{
+  node_t self = _alloc_self();
+  self->nodes = NULL;
+  self->node = NULL;
+  self->render = NULL;
+  self->free_node = NULL;
+  return self; 
+}
+
 void delete_node(node_t self)
 {
-  self->free_node(self);
-  free_list_of_nodes(self->nodes);
-  free(self);
+  if(!is_constant_node(self)) {
+    self->free_node(self);
+    free_list_of_nodes(self->nodes);
+    free(self);
+  }
 }
 
 int add_node(node_t outer, node_t inner)
@@ -54,5 +66,10 @@ int add_node(node_t outer, node_t inner)
 void render_node(node_t node, text_t result)
 {
   node->render(node,result);
+}
+
+bool is_constant_node(node_t self)
+{
+  return self->nodes == NULL;
 }
 
