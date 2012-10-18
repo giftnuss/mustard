@@ -28,6 +28,7 @@ compile tag.c
 compile attribute.c
 compile document.c
 compile constant_nodes.c
+compile constant_strings.c
 
 #strip build/*.o
 strip -x build/*.o
