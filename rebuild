@@ -1,0 +1,40 @@
+#!/bin/bash
+
+if [ -d build ] ; then
+   rm build/*.o
+   ./cmd
+   ./prv
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
