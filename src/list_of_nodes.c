@@ -19,14 +19,20 @@ static nodelist_t _alloc_self()
   return (nodelist_t) NULL;
 }
 
-static node_t* _alloc_data(node_t* buf, int current_size, int* new_size)
+static node_t* _alloc_data
+    (
+        node_t* buf, /* real nodelist buffer */
+        int current_size, /* current allocated nodecount */
+        int* new_size /* new size */
+    )
 {
-  if(current_size == 0) {       *new_size =   4; }
-  else if(current_size < 5) {   *new_size =   9; }
-  else if(current_size < 10) {  *new_size =  35; }
-  else if(current_size < 128) { *new_size = 128; }
-  else { *new_size += 128; }
-
+  if(*new_size <= current_size) {
+      if(current_size == 0) {       *new_size =   4; }
+      else if(current_size < 5) {   *new_size =   9; }
+      else if(current_size < 10) {  *new_size =  35; }
+      else if(current_size < 128) { *new_size = 128; }
+      else { *new_size += 128; }
+  }
   buf = (node_t*) realloc((void *)buf, *new_size * sizeof(node_t));
   if(buf != NULL) {
 	  return buf;
@@ -44,6 +50,16 @@ nodelist_t new_list_of_nodes()
   list->buffersize = bufsize;
   list->used = 0;
   return list;  
+}
+
+void dim_list_of_nodes(nodelist_t list, size_t newsize)
+{
+	
+}
+
+void insert_into_list_of_nodes(nodelist_t list, size_t idx, node_t node)
+{
+	
 }
 
 void add_to_list_of_nodes(nodelist_t list, node_t node)

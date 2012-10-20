@@ -25,10 +25,11 @@ compile application.c
 compile my.c
 compile tags.c
 compile tag.c
-compile attribute.c
+compile html_attribute.c
 compile document.c
 compile constant_nodes.c
 compile constant_strings.c
+compile testnode.c
 
 #strip build/*.o
 strip -x build/*.o

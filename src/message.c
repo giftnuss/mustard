@@ -44,13 +44,14 @@ static void _render(node_t self, text_t result)
   }
 }
 
-static void _free(node_t self)
+static bool _free(node_t self)
 {
   placeholders_t node = (placeholders_t) self->node;
   if(node->placeholders != NULL) {
 	free_list_of_leaves(node->placeholders);
   }
   free(self->node);
+  return true;
 }
 
 static void my_methods(node_t self)

@@ -18,15 +18,15 @@ static void _render(node_t self, text_t result)
   render_list_of_nodes(self->nodes, result);
 }
 
-static void _free(node_t self)
+bool default_free_node_method(node_t self)
 {
-  return;
+  return true;
 }
 
 static void my_methods(node_t self)
 {
   self->render = _render;
-  self->free_node = _free;
+  self->free_node = default_free_node_method;
 }
 
 node_t new_node()
@@ -51,8 +51,9 @@ node_t new_constant_node()
 void delete_node(node_t self)
 {
   if(!is_constant_node(self)) {
-    self->free_node(self);
-    free_list_of_nodes(self->nodes);
+    if(self->free_node(self)) {
+      free_list_of_nodes(self->nodes);
+    }
     free(self);
   }
 }
@@ -72,4 +73,5 @@ bool is_constant_node(node_t self)
 {
   return self->nodes == NULL;
 }
+
 

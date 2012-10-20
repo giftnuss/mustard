@@ -14,9 +14,10 @@ static void _render(node_t self, text_t result)
   render_list_of_nodes(self->nodes,result);
 }
 
-static void _free(node_t self)
+static bool _free(node_t self)
 {
   delete_text(self->node);
+  return true;
 }
 
 static void my_methods(node_t self)

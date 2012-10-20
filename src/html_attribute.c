@@ -2,6 +2,7 @@
 
 #include <wisper/html5/attribute.h>
 
+#include <wisper/constant/strings.h>
 #include <wisper/foundation/list_of_leaves.h>
 #include <wisper/my.h>
 
@@ -39,7 +40,7 @@ static void _free_attr(leaf_t self)
     if(attr->value.string != NULL) {
         free(attr->value.string);
     }
-    free(attr);	
+    free(attr);
 }
 
 static void _free_class_attr(leaf_t self)
@@ -107,3 +108,17 @@ void set_html5_attribute_value(leaf_t self, const char* val)
 		    attr->value.string = my_str(val); 	
 	}
 }
+
+void render_list_of_attributes(leaflist_t attrlist, text_t result)
+{
+  int upper = attrlist->buffersize;
+
+  for(int c = 0; c < upper; ++c) {
+    if(attrlist->list[c] != NULL) {
+	  text_add_text(result, constant_str_space);
+      render_leaf(attrlist->list[c],result);
+    }
+  }
+}
+
+

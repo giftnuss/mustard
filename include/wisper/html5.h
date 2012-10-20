@@ -8,4 +8,14 @@
 
 #include <wisper/foundation/textnode.h>
 
+enum 
+{
+	HTML_DOCUMENT,
+	HTML_DOCUMNT_HTML,
+	HTML_DOCUMENT_HEAD,
+	HTML_DOCUMENT_BODY
+};
+
+node_t build_html_document_layout();
+
 #endif

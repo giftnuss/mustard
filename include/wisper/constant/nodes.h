@@ -8,4 +8,6 @@ node_t const_node_space();
 
 node_t const_node_newline();
 
+node_t const_node_empty();
+
 #endif

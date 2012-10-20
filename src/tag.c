@@ -26,6 +26,9 @@ static void _render_single_tag(node_t self, text_t result)
   html_node_t node = (html_node_t) self->node;
   text_add_text(result, _begin_tag);
   text_add_text(result, node->element_name);
+  if(node->attributes != NULL) {
+      render_list_of_attributes(node->attributes, result);
+  }
   text_add_text(result, _close_stag);
   render_list_of_nodes(self->nodes, result);
 }
@@ -35,6 +38,9 @@ static void _render_double_tag(node_t self, text_t result)
   html_node_t node = (html_node_t) self->node;
   text_add_text(result, _begin_tag);
   text_add_text(result, node->element_name);
+  if(node->attributes != NULL) {
+      render_list_of_attributes(node->attributes, result);
+  }
   text_add_text(result, _close_tag);
   render_list_of_nodes(self->nodes, result);
   text_add_text(result, _begin_endtag);
@@ -44,21 +50,30 @@ static void _render_double_tag(node_t self, text_t result)
 
 static void (*(_renderer[]))(node_t, text_t) = {
   _render_double_tag, /* a */
+  _render_double_tag, /* address */
+  _render_single_tag, /* base */
   _render_double_tag, /* body */
   _render_single_tag, /* br */
+  _render_double_tag, /* button */
   _render_double_tag, /* canvas */
   _render_double_tag, /* dd */
   _render_double_tag, /* dfn */
   _render_double_tag, /* div */
   _render_double_tag, /* dl */
   _render_double_tag, /* dt */
+  _render_double_tag, /* fieldset */
   _render_double_tag, /* form */
   _render_double_tag, /* head */
+  _render_single_tag, /* hr */
   _render_double_tag, /* html */
+  _render_single_tag, /* img */
   _render_single_tag, /* input */
+  _render_double_tag, /* legend */
   _render_double_tag, /* li */
+  _render_single_tag, /* link */
   _render_single_tag, /* meta */
   _render_double_tag, /* ol */
+  _render_double_tag, /* optgroup */
   _render_double_tag, /* option */
   _render_double_tag, /* ruby */
   _render_double_tag, /* rp */
@@ -67,7 +82,14 @@ static void (*(_renderer[]))(node_t, text_t) = {
   _render_double_tag, /* select */
   _render_double_tag, /* span */
   _render_double_tag, /* style */
+  _render_double_tag, /* table */
+  _render_double_tag, /* tbody */
+  _render_double_tag, /* td */
   _render_double_tag, /* textarea */
+  _render_double_tag, /* tfoot */
+  _render_double_tag, /* th */
+  _render_double_tag, /* title */
+  _render_double_tag, /* tr */
   _render_double_tag, /* ul */
   _render_double_tag, /* video */
   _render_single_tag  /* wbr */
@@ -93,13 +115,14 @@ static void set_renderer(node_t self, html5_element_type id)
 /**
  * element_name wird extern verwaltet, bzw ist zu 99% statisch.
  */
-static void _free_node(node_t self)
+static bool _free_node(node_t self)
 {
    html_node_t node = (html_node_t) self->node;
    if(node->attributes != NULL) {
       free_list_of_leaves(node->attributes);
    }
-   free(self->node); 
+   free(self->node);
+   return true;
 }
 
 node_t new_html5_tag(html5_element_type id)

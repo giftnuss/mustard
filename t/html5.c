@@ -12,10 +12,16 @@ static void check_clean_doc()
       "<?doctype html?><html><head></head><body></body></html>";
    render_node(doc->document,result);
    is(text_get_text(result),expect,"clean document");
+   
    delete_html5_document(doc); 
+   delete_text(result);
 }
+
+
 
 int main()
 {
    check_clean_doc();
+   
+   
 }
