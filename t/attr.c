@@ -9,7 +9,7 @@
 #define _at wisper_html_attribute_name
 
 static void check_name_def()
-{	
+{
   is(_at[ attribute_action  ],"action","action attribute");
   is(_at[ attribute_alt     ],"alt","alt attribute");
   is(_at[ attribute_charset ],"charset","charset attribute");

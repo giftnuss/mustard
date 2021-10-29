@@ -4,6 +4,8 @@
 
 . functions
 
+mkdir -p build/
+
 compile bool.c
 compile tap.c
 compile exceptions.c
