@@ -7,72 +7,72 @@ OBJ="build/*.o"
 
 function compile ()
 {
-	SRC=src
+    SRC=src
     _compile $@
 }
 
 function compile_sdl ()
 {
-	SRC=src_sdl
-	_compile $@
+    SRC=src_sdl
+    _compile $@
 }
 
 function _compile ()
 {
-	local n file cmd src trg bld
-	file=$1; shift
-	n=$(basename $file .c)
-	src=$(stat --printf %Y $SRC/$file)
-	
-	if [ -f build/$n.o ]; then
-		trg=$(stat --printf %Y build/$n.o)
-		if [ $src -gt $trg ] ; then bld=1 ; fi
-	else
-		bld=1
-	fi
-	
-	if [ -n "$bld" ] ; then
-		cmd="$CC -Wall -I ./include -c -std=c99 "
-		cmd="$cmd -o build/$n.o $SRC/$file"
-		echo $cmd
-		$cmd
-	fi
+    local n file cmd src trg bld
+    file=$1; shift
+    n=$(basename $file .c)
+    src=$(stat --printf %Y $SRC/$file)
+
+    if [ -f build/$n.o ]; then
+        trg=$(stat --printf %Y build/$n.o)
+        if [ $src -gt $trg ] ; then bld=1 ; fi
+    else
+        bld=1
+    fi
+
+    if [ -n "$bld" ] ; then
+        cmd="$CC -Wall -I ./include -c -std=c99 "
+        cmd="$cmd -o build/$n.o $SRC/$file"
+        echo $cmd
+        $cmd
+    fi
 }
 
 function build_sdl ()
 {
-	LIBS=-lSDL
-	build_and_run $@
+    LIBS=-lSDL
+    build_and_run $@
 }
 
 function build_tap ()
 {
-	BINDIR=./tap
-	OBJ=$(ls build/*.o | grep -v sdl)
+    BINDIR=./tap
+    OBJ=$(ls build/*.o | grep -v sdl)
     build_and_run $@
 }
 
 function build_and_run ()
 {
-	local file n src trg bld
-	file=$1; shift
-	n=$BINDIR/$(basename $file .c)
-	src=$(stat --printf %Y $file)
-	
-	if [ -f $n ]; then
-		trg=$(stat --printf %Y $n)
-		if [ $src -gt $trg ] ; then bld=1 ; fi
-	else
-		bld=1
-	fi
-	
-	if [ -n "$bld" ] ; then
-		cmd="$CC -Wall -I ./include -std=c99 "
-		cmd="$cmd -o $n $file $OBJ $LIBS"
-		echo $cmd
-		$cmd
-	fi
-	$n
+  local file n src trg bld
+  file=$1; shift
+  n=$BINDIR/$(basename $file .c)
+  src=$(stat --printf %Y $file)
+
+  if [ -f $n ]; then
+    trg=$(stat --printf %Y $n)
+    if [ $src -gt $trg ] ; then bld=1 ; fi
+  else
+    bld=1
+  fi
+
+  if [ -n "$bld" ] ; then
+    cmd="$CC -Wall -I ./include -std=c99 "
+    cmd="$cmd -o $n $file $OBJ $LIBS"
+    echo $cmd
+    $cmd
+  fi
+  $n
 }
 
 
