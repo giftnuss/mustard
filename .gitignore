@@ -1,3 +1,5 @@
 *.o
 *~
 tap/
+gmon.out
+wisper.a
